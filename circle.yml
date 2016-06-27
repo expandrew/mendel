@@ -15,6 +15,7 @@ dependencies:
     - pip install awscli
     - npm install -g gulp bower
     - npm install
+    - cd mendel/angular
     - bower install
     - gulp clean
     - gulp django
