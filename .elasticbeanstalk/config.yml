@@ -3,9 +3,9 @@ branch-defaults:
     environment: django-env
     group_suffix: null
 global:
-  application_name: architizer-mendel-prod
+  application_name: andrew-mendel-prod
   default_ec2_keyname: null
   default_platform: python2.7
-  default_region: us-west-2
+  default_region: us-east-1
   profile: null
   sc: git
