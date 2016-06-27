@@ -23,8 +23,8 @@ zip $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE -r *
 # Create new Elastic Beanstalk version
 aws s3 cp $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE s3://$EB_BUCKET/$SOURCE_BUNDLE
 aws elasticbeanstalk create-application-version --application-name $EB_APPLICATION \
-  --version-label $SHA1 --source-bundle S3Bucket=$EB_BUCKET,S3Key=$SOURCE_BUNDLE
+  --version-label $NOW-$SHA_CUT --source-bundle S3Bucket=$EB_BUCKET,S3Key=$SOURCE_BUNDLE
 
 # Update Elastic Beanstalk environment to new version
 aws elasticbeanstalk update-environment --environment-name $EB_ENVIRONMENT \
-  --version-label $SHA1
+  --version-label $NOW-$SHA_CUT
