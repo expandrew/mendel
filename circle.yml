@@ -13,6 +13,7 @@ general:
 dependencies:
   override:
     - pip install awscli
+    - pip install awsebcli
     - npm install -g gulp bower
     - npm install
     - bower install:
@@ -36,4 +37,5 @@ deployment:
       - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
     branch: elastic-beanstalk
     commands:
-      - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
+      # - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
+      - eb deploy
