@@ -38,4 +38,5 @@ deployment:
     branch: elastic-beanstalk
     commands:
       # - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
+      - eb use andrew-mendel-prod-2-7
       - eb deploy
