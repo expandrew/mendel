@@ -4,7 +4,7 @@
 SHA1=$1
 EB_ENVIRONMENT=$2
 
-SHA_CUT=$SHA1 | cut -c1-5
+SHA_CUT=`echo $SHA1 | cut -c1-5`
 
 EB_BUCKET=andrew-mendel-deployment
 EB_APPLICATION=andrew-mendel
