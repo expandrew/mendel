@@ -4,9 +4,12 @@
 SHA1=$1
 EB_ENVIRONMENT=$2
 
+SHA_CUT=$SHA1 | cut -c1-5
+
 EB_BUCKET=andrew-mendel-deployment
 EB_APPLICATION=andrew-mendel
-SOURCE_BUNDLE=$SHA1-source.zip
+NOW=`date '+%F-T-%H-%M-%S'`
+SOURCE_BUNDLE=Source-$NOW-$SHA_CUT.zip
 
 # Configure AWS CLI
 aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
