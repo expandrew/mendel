@@ -39,4 +39,5 @@ deployment:
     commands:
       # - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
       - eb use andrew-mendel-prod-2-7
+      - git add .
       - eb deploy --staged
