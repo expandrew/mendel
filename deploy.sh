@@ -1,19 +1,21 @@
 #! /bin/bash
+# deploy.sh
 
-set -x
-set -e
+SHA1=$1
+EB_ENVIRONMENT=$2
 
+EB_BUCKET=andrew-mendel-deployment
+EB_APPLICATION=andrew-mendel
+SOURCE_BUNDLE=$SHA1-source.zip
 
-wget https://s3.amazonaws.com/elasticbeanstalk/cli/AWS-ElasticBeanstalk-CLI-2.6.3.zip -O /home/ubuntu/AWS-ElasticBeanstalk-CLI-2.6.3.zip
-cd /home/ubuntu && unzip AWS-ElasticBeanstalk-CLI-2.6.3.zip
-echo 'export PATH=$PATH:/home/ubuntu/AWS-ElasticBeanstalk-CLI-2.6.3/eb/linux/python2.7/' >> ~/.circlerc
+# Create Source Bundle Zip
+zip $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE -r .ebextensions/
 
-cd /home/ubuntu/$CIRCLE_PROJECT_REPONAME && bash /home/ubuntu/AWS-ElasticBeanstalk-CLI-2.6.3/AWSDevTools/Linux/AWSDevTools-RepositorySetup.sh
+# Create new Elastic Beanstalk version
+aws s3 cp $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE s3://$EB_BUCKET/$SOURCE_BUNDLE
+aws elasticbeanstalk create-application-version --application-name $EB_APPLICATION \
+  --version-label $SHA1 --source-bundle S3Bucket=$EB_BUCKET,S3Key=$SOURCE_BUNDLE
 
-# set up credentials
-
-touch /home/ubuntu/.aws-credentials
-chmod 600 /home/ubuntu/.aws-credentials
-echo "AWSAccessKeyId=$AWS_ACCESS_KEY_ID" > /home/ubuntu/.aws-credentials
-echo "AWSSecretKey=$AWS_SECRET_KEY" >> /home/ubuntu/.aws-credentials
-echo 'export AWS_CREDENTIAL_FILE=/home/ubuntu/.aws-credentials' >> ~/.circlerc
+# Update Elastic Beanstalk environment to new version
+aws elasticbeanstalk update-environment --environment-name $EB_ENVIRONMENT \
+  --version-label $SHA1
