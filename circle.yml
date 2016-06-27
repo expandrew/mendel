@@ -34,6 +34,6 @@ deployment:
     branch: master
     commands:
       - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
-    branch: develop
+    branch: elastic-beanstalk
     commands:
-      - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-stag
+      - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
