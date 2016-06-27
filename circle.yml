@@ -15,15 +15,6 @@ dependencies:
     - pip install awscli
     - npm install -g gulp bower
     - npm install
-    - bower install:
-        pwd: 
-          mendel/angular
-    - gulp clean:
-        pwd:
-          mendel/angular
-    - gulp django:
-        pwd:
-          mendel/angular
 
 test:
  override:
@@ -33,7 +24,25 @@ deployment:
   elasticbeanstalk:
     branch: master
     commands:
+      - bower install:
+          pwd: 
+            mendel/angular
+      - gulp clean:
+          pwd:
+            mendel/angular
+      - gulp django:
+          pwd:
+            mendel/angular
       - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-prod
     branch: develop
     commands:
+      - bower install:
+          pwd: 
+            mendel/angular
+      - gulp clean:
+          pwd:
+            mendel/angular
+      - gulp django:
+          pwd:
+            mendel/angular
       - bash -x deploy.sh $CIRCLE_SHA1 andrew-mendel-stag
