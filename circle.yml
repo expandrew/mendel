@@ -16,13 +16,13 @@ dependencies:
     - npm install -g gulp bower
     - npm install
     - bower install:
-      - pwd: 
+      pwd: 
         mendel/angular
     - gulp clean:
-      - pwd:
+      pwd:
         mendel/angular
     - gulp django:
-      - pwd:
+      pwd:
         mendel/angular
 
 test:
