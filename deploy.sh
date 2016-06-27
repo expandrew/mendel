@@ -15,7 +15,7 @@ aws configure set default.region us-east-1
 aws configure set default.output json
 
 # Create Source Bundle Zip
-zip $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE -r .ebextensions/
+zip $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE -r *
 
 # Create new Elastic Beanstalk version
 aws s3 cp $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE s3://$EB_BUCKET/$SOURCE_BUNDLE
