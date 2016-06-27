@@ -8,6 +8,12 @@ EB_BUCKET=andrew-mendel-deployment
 EB_APPLICATION=andrew-mendel
 SOURCE_BUNDLE=$SHA1-source.zip
 
+# Configure AWS CLI
+aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+aws configure set default.region us-east-1
+aws configure set default.output json
+
 # Create Source Bundle Zip
 zip $CIRCLE_ARTIFACTS/$SOURCE_BUNDLE -r .ebextensions/
 
