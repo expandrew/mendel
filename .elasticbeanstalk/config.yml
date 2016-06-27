@@ -1,9 +1,9 @@
 branch-defaults:
   master:
-    environment: django-env
+    environment: andrew-mendel-prod
     group_suffix: null
 global:
-  application_name: andrew-mendel-prod
+  application_name: andrew-mendel
   default_ec2_keyname: null
   default_platform: python2.7
   default_region: us-east-1
